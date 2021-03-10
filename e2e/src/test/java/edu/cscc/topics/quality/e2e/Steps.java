@@ -29,10 +29,15 @@ public class Steps {
         Note the annotation (@When).
         This step definition triggers on 'When I go to the Hello World homepage'
      */
-    @When("^I go to the Hello World homepage$")
+    @When("^I go to the Hello World homepage$|^I am on the Hello World homepage$")
     public void whenIGoToTheHompeage() {
         // this line tells the ChromeDriver to direct its chrome instance to http://localhost:8080/
         driver.navigate().to("http://localhost:8080/");
+    }
+
+    @When("^I click the link with id \"helloLink\"$")
+    public void clickLinkHelloLink() {
+        driver.findElement((By.id("helloLink"))).click();
     }
 
     /*
@@ -45,4 +50,11 @@ public class Steps {
         String output = driver.findElement(By.id("helloId")).getText();
         Assert.assertEquals(text, output);
     }
+
+    @Then("^I am taken to the hello subpage$")
+    public void stepsTakenToHelloPage() {
+        Assert.assertEquals("http://localhost:8080/hello", driver.getCurrentUrl());
+    }
+
+
 }
